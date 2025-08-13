@@ -82,7 +82,7 @@ metadata:
   labels:
     app: mtkpi
 spec:
-  type: LoadBalancer
+  type: NodePort # was LoadBalancer
   ports:
   - port: 7681
     targetPort: 7681
