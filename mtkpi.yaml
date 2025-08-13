@@ -37,13 +37,14 @@ subjects:
   namespace: pentest
 ---
 apiVersion: apps/v1
-kind: DaemonSet # changed from Deployment
+kind: Deployment
 metadata:
   name: mtkpi
   namespace: pentest
   labels:
     app: mtkpi
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: mtkpi
@@ -81,7 +82,7 @@ metadata:
   labels:
     app: mtkpi
 spec:
-  type: NodePort # changed from LoadBalancer
+  type: NodePort # LoadBalancer
   ports:
   - port: 7681
     targetPort: 7681
