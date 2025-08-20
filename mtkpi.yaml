@@ -64,8 +64,24 @@ spec:
       ports:
       - name: mtkpi-hostport
         containerPort: 7681
-        hostPort: 31681
       tolerations:
         - key: ""
           operator: "Exists"
           effect: "NoSchedule"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mtkpi
+  namespace: pentest
+spec:
+  type: NodePort
+  externalTrafficPolicy: Local 
+  selector:
+    app: mtkpi 
+  ports:
+  - name: mtkpi-port
+    protocol: TCP
+    port: 7681
+    targetPort: 7681
+    nodePort: 31681
