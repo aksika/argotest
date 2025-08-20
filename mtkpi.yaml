@@ -37,7 +37,7 @@ subjects:
   namespace: pentest
 ---
 apiVersion: apps/v1
-kind: DaemonSet # changed from Deployment
+kind: DaemonSet
 metadata:
   name: mtkpi
   namespace: pentest
@@ -61,30 +61,11 @@ spec:
         image: r0binak/mtkpi:v1.5
         securityContext:
           privileged: true
-        volumeMounts:
-        - mountPath: /host
-          name: noderoot
-      volumes:
-      - name: noderoot
-        hostPath:
-          path: /
+      ports:
+      - name: mtkpi-hostport
+        containerPort: 7681
+        hostPort: 31681
       tolerations:
         - key: ""
           operator: "Exists"
           effect: "NoSchedule"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mtkpi
-  namespace: pentest
-  labels:
-    app: mtkpi
-spec:
-  type: NodePort # changed from LoadBalancer
-  ports:
-  - port: 7681
-    targetPort: 7681
-    protocol: TCP
-  selector:
-    app: mtkpi
