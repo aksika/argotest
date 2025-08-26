@@ -39,7 +39,7 @@ spec:
   serviceAccountName: pentest-sa
   containers:
   - name: pentest
-    image: busybox
+    image: alpine
     securityContext:
       privileged: false
     command: ["/bin/sh", "-c", "sleep 3600"]
