@@ -1,0 +1,12 @@
+replicaCount: 1
+
+image:
+  repository: r0binak/mtkpi
+  tag: v1.5
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 7681
+
+namespace: examples       # default target namespace
