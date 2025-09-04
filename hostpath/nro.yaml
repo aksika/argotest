@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nrpod
+  labels:
+spec:
+  selector:
+    matchLabels:
+      name: nrdaemon
+  template:
+    metadata:
+      labels:
+        name: nrdaemon
+    spec:
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+      containers:
+      - name: nrpod
+        image: alpine
+        securityContext:
+          privileged: false
+        volumeMounts:
+        - mountPath: /host
+          name: nro
+        command: [ "/bin/sh", "-c", "sleep 3600" ]
+      volumes:
+      - name: nro
+        hostPath:
+          path: /
