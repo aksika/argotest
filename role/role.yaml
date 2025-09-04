@@ -2,13 +2,13 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: pentest-sa
-  namespace: deployer-ci
+  namespace: kube-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: pentest-role
-  namespace: deployer-ci
+  namespace: kube-system
 rules:
 - apiGroups: ["*"]
   resources: ["*"]
@@ -18,11 +18,11 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: pentest-bind
-  namespace: deployer-ci
+  namespace: kube-system
 subjects:
 - kind: ServiceAccount
   name: pentest-sa
-  namespace: deployer-ci
+  namespace: kube-system
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -32,7 +32,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: pentest
-  namespace: deployer-ci
+  namespace: kube-system
   labels:
     app: pentest
 spec:
@@ -42,4 +42,4 @@ spec:
     image: alpine
     securityContext:
       privileged: false
-    command: ["/bin/sh", "-c", "apk add --no-cache kubectl && ttoken=$(kubectl exec -n deployer-ci eric-lcm-declarative-deployer-ag-appset-ctrlr-58496f967b-6tcqk -- cat /var/run/secrets/kubernetes.io/serviceaccount/token) && kubectl --token $ttoken auth can-i --list && sleep 3600"]
+    command: ["/bin/sh", "-c", "apk add --no-cache kubectl && kubectl auth can-i --list && sleep 3600"]
