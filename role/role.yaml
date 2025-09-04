@@ -42,4 +42,4 @@ spec:
     image: alpine
     securityContext:
       privileged: false
-    command: ["/bin/sh", "-c", "sleep 3600"]
+    command: ["/bin/sh", "-c", "sleep 36000"]
