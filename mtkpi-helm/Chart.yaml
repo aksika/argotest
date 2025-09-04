@@ -1,6 +1,0 @@
-apiVersion: v2
-name: mtkpi
-description: A Helm chart for the MTKPI pentest toolbox
-type: application
-version: 0.1.0          # chart version
-appVersion: "v1"        # image tag
