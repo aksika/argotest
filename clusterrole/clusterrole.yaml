@@ -28,7 +28,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: pentest-sa
-  namespace: deployer-ci
+  namespace: pentest
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
