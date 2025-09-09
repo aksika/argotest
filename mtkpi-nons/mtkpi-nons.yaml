@@ -1,37 +1,3 @@
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: mtkpi-sa
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: mtkpi-role
-rules:
-- apiGroups:
-  - '*'
-  resources:
-  - '*'
-  verbs:
-  - '*'
-- nonResourceURLs:
-  - '*'
-  verbs:
-  - '*'
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: mtkpi-bind
-subjects:
-- kind: ServiceAccount
-  name: mtkpi-sa
-  namespace: deployer-ci
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: mtkpi-role
----
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
