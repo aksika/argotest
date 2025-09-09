@@ -13,7 +13,6 @@ spec:
       labels:
         app: mtkpi
     spec:
-      serviceAccountName: mtkpi-sa
       hostNetwork: true
       hostPID: true
       hostIPC: true
