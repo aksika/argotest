@@ -13,14 +13,14 @@ spec:
       labels:
         app: mtkpi
     spec:
-      hostNetwork: true
-      hostPID: true
-      hostIPC: true
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
       containers:
       - name: mtkpi
         image: r0binak/mtkpi:v1.5
         securityContext:
-          privileged: true
+          privileged: false
       ports:
       - name: mtkpi-hostport
         containerPort: 7681
